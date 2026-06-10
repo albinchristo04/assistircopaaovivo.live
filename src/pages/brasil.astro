@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import FixtureTable from '../components/FixtureTable.astro';
+import { brazilFixtures, fixturesOnOrAfter, formatDateBR, formatTimeBR } from '../lib/data';
+
+const upcomingIds = new Set(fixturesOnOrAfter(new Date()).map((f) => f.id));
+const nextBrazil = brazilFixtures.find((f) => upcomingIds.has(f.id)) ?? brazilFixtures[0];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Que horas é o jogo do Brasil na Copa 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `O próximo jogo do Brasil é ${nextBrazil.teamA} x ${nextBrazil.teamB}, em ${formatDateBR(nextBrazil.date)}, às ${formatTimeBR(nextBrazil.date)} (horário de Brasília). Na fase de grupos, os jogos da Seleção começam às 22h.`
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Onde assistir os jogos do Brasil na Copa do Mundo 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Todos os jogos do Brasil passam ao vivo e grátis na CazéTV (YouTube) e na TV Globo (TV aberta), com retransmissão online pelo Globoplay.'
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="Jogos do Brasil na Copa 2026: Que Horas e Onde Assistir ao Vivo Grátis"
+  description="Jogos do Brasil na Copa do Mundo 2026: datas, que horas começa cada jogo (horário de Brasília) e onde assistir ao vivo grátis — CazéTV no YouTube e Globo na TV."
+  path="/brasil"
+  jsonLd={[faqLd]}
+>
+  <h1>Jogos do Brasil na Copa 2026 — Que Horas e Onde Assistir</h1>
+
+  <p class="lead">
+    A Seleção Brasileira está no <strong>Grupo E</strong> da Copa do Mundo 2026, com Croácia, Japão
+    e Senegal. Na fase de grupos, os jogos do Brasil começam às <strong>22h, horário de
+    Brasília</strong>. Todos passam <strong>ao vivo e grátis</strong> na
+    <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV (YouTube)</a> e na
+    <a href="https://ge.globo.com/" rel="noopener">TV Globo</a>.
+  </p>
+
+  <h2>Que horas é o jogo do Brasil?</h2>
+  <div class="box">
+    <strong>Próximo jogo:</strong> {nextBrazil.teamA} x {nextBrazil.teamB} —
+    {formatDateBR(nextBrazil.date)}, às <strong>{formatTimeBR(nextBrazil.date)}</strong> (horário de
+    Brasília), no {nextBrazil.venue}, em {nextBrazil.city}.
+    <br />
+    <a class="cta" href={`/${nextBrazil.slug}`}>Onde assistir {nextBrazil.teamA} x {nextBrazil.teamB} →</a>
+  </div>
+
+  <h2>Tabela de jogos do Brasil na fase de grupos</h2>
+  <FixtureTable fixtures={brazilFixtures} />
+
+  <h2>Onde assistir os jogos do Brasil ao vivo?</h2>
+  <p>
+    <strong>Grátis no YouTube:</strong> a CazéTV transmite todos os jogos da Seleção (e os outros
+    98 da Copa) no canal oficial
+    <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">@CazeTVoficial</a> — veja
+    <a href="/gratis">como assistir grátis</a>. <strong>Na TV:</strong> a Globo exibe todos os jogos
+    do Brasil na TV aberta, com sinal online no
+    <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>. Em dias de jogo da Seleção,
+    é só escolher: YouTube ou televisão — os dois são transmissões oficiais e gratuitas.
+  </p>
+
+  <h2>O caminho do Brasil no mata-mata</h2>
+  <p>
+    Se avançar em primeiro do Grupo E, o Brasil joga as oitavas (rodada de 32) no dia
+    <strong>5 de julho</strong>. A tabela completa do mata-mata sai quando a fase de grupos
+    terminar — acompanhe no nosso <a href="/jogos">calendário</a> e no site da
+    <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA</a>.
+  </p>
+</Base>

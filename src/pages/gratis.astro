@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import FixtureTable from '../components/FixtureTable.astro';
+import { fixturesOnOrAfter } from '../lib/data';
+
+const upcoming = fixturesOnOrAfter(new Date(), 6);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Como assistir a Copa do Mundo 2026 grátis?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Acesse o canal oficial da CazéTV no YouTube (youtube.com/@CazeTVoficial). A CazéTV transmite todos os 104 jogos da Copa do Mundo 2026 ao vivo e de graça, de forma 100% legal.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Assistir a Copa pela CazéTV é legal?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. A CazéTV detém os direitos oficiais de transmissão da Copa do Mundo 2026 no Brasil e exibe os jogos gratuitamente no YouTube. É transmissão oficial, não pirataria.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Dá para assistir a Copa grátis na TV?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. A Globo transmite cerca de 55 jogos na TV aberta, incluindo todos os do Brasil, e o SBT exibe cerca de 32 jogos. TV aberta é gratuita.'
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="Assistir Copa do Mundo 2026 Grátis: CazéTV ao Vivo no YouTube (Legal)"
+  description="Assistir copa do mundo 2026 grátis e legal: a CazéTV transmite todos os 104 jogos ao vivo de graça no YouTube. Veja o passo a passo e as outras opções gratuitas (Globo e SBT)."
+  path="/gratis"
+  jsonLd={[faqLd]}
+>
+  <h1>Como Assistir a Copa do Mundo 2026 Grátis e Ao Vivo</h1>
+
+  <p class="lead">
+    Sim, dá para <strong>assistir a copa ao vivo grátis</strong> — e sem pirataria. A
+    <strong>CazéTV</strong> transmite <strong>todos os 104 jogos da Copa do Mundo 2026 de graça no
+    YouTube</strong>, no canal oficial. Além dela, Globo e SBT mostram dezenas de jogos na TV
+    aberta. Nesta página você vê o passo a passo para assistir de graça em qualquer aparelho.
+  </p>
+
+  <div class="box">
+    <strong>O caminho mais rápido:</strong> abra o canal oficial da CazéTV no YouTube e pronto —
+    todos os jogos, ao vivo, grátis.
+    <br />
+    <a class="cta" href="https://www.youtube.com/@CazeTVoficial" rel="noopener">
+      Abrir CazéTV no YouTube →
+    </a>
+  </div>
+
+  <h2>Assistir grátis no YouTube via CazéTV: passo a passo</h2>
+  <ol>
+    <li>Abra o YouTube no celular, computador, tablet ou smart TV.</li>
+    <li>Busque por <strong>CazéTV</strong> ou acesse direto
+      <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">youtube.com/@CazeTVoficial</a>.</li>
+    <li>No dia do jogo, a transmissão ao vivo aparece em destaque no canal.</li>
+    <li>Toque na live e assista — sem cadastro, sem assinatura, sem pagar nada.</li>
+  </ol>
+  <p>
+    Dica: inscreva-se no canal e ative o sininho para receber aviso quando a transmissão começar.
+    Os jogos do Brasil na fase de grupos começam às <strong>22h, horário de Brasília</strong> —
+    confira todos em <a href="/brasil">jogos do Brasil</a>.
+  </p>
+
+  <h2>Por que a CazéTV é grátis (e 100% legal)?</h2>
+  <p>
+    A CazéTV comprou os <strong>direitos oficiais de transmissão</strong> da Copa do Mundo 2026 para
+    o Brasil e adota o modelo de transmissão aberta no YouTube, financiada por publicidade — igual à
+    TV aberta, só que online. Ou seja, assistir a copa de graça pela CazéTV não é pirataria: é a
+    transmissão oficial. Por isso este guia recomenda sempre os canais oficiais e nunca sites de
+    streaming não licenciados, que além de ilegais costumam trazer malware e golpes.
+  </p>
+
+  <h2>Outras formas gratuitas: Globo e SBT na TV aberta</h2>
+  <p>
+    Prefere a televisão? A <a href="https://ge.globo.com/" rel="noopener">Globo</a> transmite cerca
+    de <strong>55 jogos</strong> na TV aberta — incluindo todos os da Seleção — e o
+    <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> exibe cerca de
+    <strong>32 jogos</strong>, com retransmissão online pelo
+    <a href="https://nsports.com.br/" rel="noopener">N Sports</a>. TV aberta não custa nada: basta
+    sintonizar o canal na hora do jogo. O <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>
+    também retransmite o sinal aberto da Globo de graça (com cadastro).
+  </p>
+
+  <h2>Próximos jogos para assistir grátis</h2>
+  <p>Todos os jogos abaixo terão transmissão gratuita pela CazéTV no YouTube:</p>
+  <FixtureTable fixtures={upcoming} />
+  <p><a href="/jogos">Ver calendário completo com horários de Brasília →</a></p>
+
+  <h2>Perguntas frequentes sobre assistir grátis</h2>
+  <h3>Preciso de conta no YouTube para assistir?</h3>
+  <p>Não. As lives da CazéTV são abertas — qualquer pessoa pode assistir sem login.</p>
+  <h3>Funciona na smart TV?</h3>
+  <p>
+    Sim. Abra o aplicativo do YouTube na sua smart TV (ou use Chromecast/Fire Stick) e procure o
+    canal CazéTV.
+  </p>
+  <h3>E se eu estiver fora do Brasil?</h3>
+  <p>
+    As transmissões da CazéTV valem para o território brasileiro. Fora do país, procure o
+    transmissor oficial local — a lista completa está no site da
+    <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA</a>.
+  </p>
+</Base>

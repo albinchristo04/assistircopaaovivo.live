@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  {
+    q: 'Onde assistir a Copa do Mundo 2026 ao vivo no Brasil?',
+    a: 'Nos canais oficiais: CazéTV (todos os 104 jogos, grátis no YouTube), TV Globo (~55 jogos na TV aberta, incluindo todos os do Brasil, com sinal no Globoplay) e SBT com N Sports (~32 jogos).'
+  },
+  {
+    q: 'Como assistir a Copa 2026 grátis?',
+    a: 'Pela CazéTV no YouTube (youtube.com/@CazeTVoficial), que transmite todos os jogos de graça e legalmente, ou pela TV aberta na Globo e no SBT.'
+  },
+  {
+    q: 'Que horas é o jogo do Brasil?',
+    a: 'Na fase de grupos, os jogos do Brasil começam às 22h (horário de Brasília): Brasil x Croácia em 15/06, Brasil x Japão em 23/06 e Brasil x Senegal em 29/06.'
+  },
+  {
+    q: 'A CazéTV é legal? Não é pirataria?',
+    a: 'É 100% legal. A CazéTV detém os direitos oficiais de transmissão da Copa 2026 no Brasil e exibe os jogos abertamente no YouTube, financiada por publicidade.'
+  },
+  {
+    q: 'Quando começa a Copa do Mundo 2026?',
+    a: 'Em 11 de junho de 2026, com a final em 19 de julho. O torneio acontece nos Estados Unidos, México e Canadá, com 48 seleções e 104 jogos.'
+  },
+  {
+    q: 'Os horários deste site estão em qual fuso?',
+    a: 'Todos os horários são exibidos no horário de Brasília (BRT, UTC−3).'
+  },
+  {
+    q: 'Este site transmite os jogos?',
+    a: 'Não. Somos um guia independente de onde assistir: indicamos apenas as transmissões oficiais (CazéTV, Globo, Globoplay, SBT e N Sports) e nunca links piratas.'
+  }
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a }
+  }))
+};
+---
+
+<Base
+  title="FAQ: Onde Assistir a Copa do Mundo 2026 ao Vivo e Grátis no Brasil"
+  description="Perguntas frequentes sobre como assistir a Copa do Mundo 2026 ao vivo no Brasil: CazéTV grátis no YouTube, jogos na Globo e SBT, horários de Brasília e jogos do Brasil."
+  path="/faq"
+  jsonLd={[faqLd]}
+>
+  <h1>Perguntas Frequentes — Assistir Copa do Mundo 2026 ao Vivo</h1>
+
+  <p class="lead">
+    Tudo o que você precisa saber para <strong>assistir copa ao vivo</strong> no Brasil: opções
+    grátis, canais oficiais, horários de Brasília e jogos da Seleção.
+  </p>
+
+  {faqs.map((f) => (
+    <section>
+      <h2>{f.q}</h2>
+      <p>{f.a}</p>
+    </section>
+  ))}
+
+  <p>
+    Veja também: <a href="/gratis">como assistir grátis pela CazéTV</a> ·
+    <a href="/jogos">jogos de hoje</a> · <a href="/brasil">jogos do Brasil</a>.
+  </p>
+</Base>

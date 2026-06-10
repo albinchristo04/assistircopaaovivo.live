@@ -1,0 +1,182 @@
+---
+import { SITE } from '../../site.config';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object[];
+}
+
+const { title, description, path, jsonLd = [] } = Astro.props;
+const canonical = `${SITE.url}${path === '/' ? '/' : path}`;
+
+const siteGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE.url}/#org`,
+      name: SITE.brand,
+      url: `${SITE.url}/`,
+      logo: `${SITE.url}/logo.png`,
+      sameAs: [SITE.social.instagram, SITE.social.facebook, SITE.social.x]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.url}/#website`,
+      url: `${SITE.url}/`,
+      name: SITE.brand,
+      inLanguage: SITE.lang,
+      publisher: { '@id': `${SITE.url}/#org` }
+    }
+  ]
+};
+
+const updated = new Date().toLocaleDateString('pt-BR', {
+  timeZone: SITE.timezone,
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <script type="application/ld+json" set:html={JSON.stringify(siteGraph)} />
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+    <style>
+      :root {
+        --green: #0a7d33;
+        --green-dark: #075c25;
+        --yellow: #ffd633;
+        --ink: #1b1b1b;
+        --muted: #555;
+        --bg: #fff;
+        --line: #e4e4e4;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+      header.site {
+        background: var(--green);
+        color: #fff;
+        padding: 0.6rem 1rem;
+      }
+      header.site .inner, main, footer.site .inner {
+        max-width: 880px;
+        margin: 0 auto;
+      }
+      header.site a.brand {
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.05rem;
+      }
+      nav.main { margin-top: 0.35rem; }
+      nav.main a {
+        color: #eaffea;
+        text-decoration: none;
+        margin-right: 0.9rem;
+        font-size: 0.95rem;
+      }
+      nav.main a:hover { text-decoration: underline; }
+      main { padding: 1rem; }
+      h1 { font-size: 1.6rem; line-height: 1.25; margin: 0.5rem 0 0.75rem; }
+      h2 { font-size: 1.25rem; margin-top: 1.75rem; }
+      a { color: var(--green-dark); }
+      .updated { color: var(--muted); font-size: 0.85rem; }
+      .lead { font-size: 1.05rem; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+      th, td { text-align: left; padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--line); }
+      th { background: #f6f6f6; }
+      .cta {
+        display: inline-block;
+        background: var(--yellow);
+        color: var(--ink);
+        font-weight: 700;
+        padding: 0.6rem 1.1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        margin: 0.5rem 0;
+      }
+      .box {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--green);
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        margin: 1rem 0;
+      }
+      .badge {
+        display: inline-block;
+        background: #e8f7ed;
+        color: var(--green-dark);
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        margin-left: 0.4rem;
+      }
+      footer.site {
+        border-top: 1px solid var(--line);
+        margin-top: 2.5rem;
+        padding: 1.25rem 1rem 2rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      footer.site a { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="inner">
+        <a class="brand" href="/">⚽ Assistir Copa ao Vivo</a>
+        <nav class="main" aria-label="Navegação principal">
+          <a href="/gratis">Assistir grátis</a>
+          <a href="/jogos">Jogos de hoje</a>
+          <a href="/brasil">Jogos do Brasil</a>
+          <a href="/faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site">
+      <div class="inner">
+        <p>
+          Guia independente de onde assistir a Copa do Mundo 2026 no Brasil. Linkamos apenas para
+          transmissões oficiais: <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV</a>,
+          <a href="https://ge.globo.com/" rel="noopener">Globo</a>,
+          <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>,
+          <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> e
+          <a href="https://nsports.com.br/" rel="noopener">N Sports</a>.
+          Calendário oficial em <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA.com</a>.
+        </p>
+        <p>
+          Siga a gente no <a href={SITE.social.instagram} rel="noopener">Instagram</a>.
+          Este site não hospeda nem incorpora transmissões — apenas indica os canais oficiais.
+        </p>
+        <p class="updated">Atualizado em {updated} ({SITE.timezoneLabel}).</p>
+      </div>
+    </footer>
+  </body>
+</html>

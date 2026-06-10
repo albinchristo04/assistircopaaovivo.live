@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import FixtureTable from '../components/FixtureTable.astro';
+import { fixturesOnOrAfter, brazilFixtures, formatDateBR, formatTimeBR } from '../lib/data';
+import { SITE } from '../../site.config';
+
+const upcoming = fixturesOnOrAfter(new Date(), 8);
+const nextBrazil = brazilFixtures.find((f) => fixturesOnOrAfter(new Date()).some((u) => u.id === f.id)) ?? brazilFixtures[0];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Onde assistir a Copa do Mundo 2026 ao vivo e grátis?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A CazéTV transmite todos os 104 jogos da Copa do Mundo 2026 ao vivo e de graça no YouTube. A Globo exibe cerca de 55 jogos na TV aberta (incluindo todos os do Brasil), e SBT com N Sports transmitem cerca de 32 jogos.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Que horas é o jogo do Brasil?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `O próximo jogo do Brasil é ${nextBrazil.teamA} x ${nextBrazil.teamB}, em ${formatDateBR(nextBrazil.date)}, às ${formatTimeBR(nextBrazil.date)} (horário de Brasília).`
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'A CazéTV vai passar todos os jogos da Copa 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. A CazéTV tem os direitos para transmitir todos os 104 jogos da Copa do Mundo 2026 gratuitamente no YouTube, no canal oficial @CazeTVoficial.'
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="Assistir Copa ao Vivo 2026: Onde Ver Todos os Jogos Grátis | Globo, CazéTV, SBT"
+  description="Assistir copa ao vivo em 2026: veja onde assistir todos os jogos da Copa do Mundo grátis e legal no Brasil — CazéTV no YouTube, Globo na TV, SBT e N Sports. Horários de Brasília."
+  path="/"
+  jsonLd={[faqLd]}
+>
+  <h1>Assistir Copa do Mundo ao Vivo 2026 — Onde Ver no Brasil</h1>
+
+  <p class="lead">
+    Quer <strong>assistir copa ao vivo</strong>? No Brasil, a Copa do Mundo 2026 tem três caminhos
+    oficiais — e o melhor deles é <strong>grátis</strong>: a <strong>CazéTV</strong> transmite
+    <strong>todos os 104 jogos de graça no YouTube</strong>. A <strong>Globo</strong> exibe cerca de
+    55 jogos na TV aberta (todos os do Brasil incluídos), e <strong>SBT</strong> com
+    <strong>N Sports</strong> mostram outros 32. Aqui você encontra onde assistir cada jogo, qual
+    canal transmite e que horas começa, sempre no horário de Brasília.
+  </p>
+
+  <div class="box">
+    <strong>Resposta rápida:</strong> para assistir a Copa do Mundo ao vivo e grátis, abra o canal
+    oficial da CazéTV no YouTube —
+    <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">youtube.com/@CazeTVoficial</a>.
+    Todos os 104 jogos, sem pagar nada.
+    <br />
+    <a class="cta" href="/gratis">Como assistir grátis →</a>
+  </div>
+
+  <h2>Assistir grátis no YouTube via CazéTV</h2>
+  <p>
+    A CazéTV garantiu os direitos de transmissão de <strong>todos os 104 jogos</strong> da Copa do
+    Mundo 2026 e vai exibir tudo <strong>ao vivo e de graça</strong> no YouTube. Basta acessar o
+    canal oficial <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">@CazeTVoficial</a>
+    pelo celular, computador ou smart TV. Não precisa de assinatura, cadastro ou cartão de crédito.
+    É a forma mais simples e 100% legal de assistir a copa ao vivo grátis no Brasil. Veja o passo a
+    passo na nossa página <a href="/gratis">como assistir a Copa grátis</a>.
+  </p>
+
+  <h2>Na TV pela Globo</h2>
+  <p>
+    A <a href="https://ge.globo.com/" rel="noopener">TV Globo</a> transmite cerca de
+    <strong>55 jogos na TV aberta</strong>, incluindo <strong>todos os jogos da Seleção
+    Brasileira</strong>, a abertura e a final. Quem prefere assistir online pode usar o
+    <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>, que retransmite o sinal da
+    Globo ao vivo. Para saber em qual canal passa cada partida, confira a página do jogo no nosso
+    <a href="/jogos">calendário de jogos</a>.
+  </p>
+
+  <h2>SBT e N Sports</h2>
+  <p>
+    O <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> voltou a transmitir Copa do Mundo e
+    exibe cerca de <strong>32 jogos na TV aberta</strong>, em parceria com o
+    <a href="https://nsports.com.br/" rel="noopener">N Sports</a> no streaming. É mais uma opção
+    gratuita para assistir copa do mundo ao vivo pela televisão, especialmente nos dias com vários
+    jogos simultâneos.
+  </p>
+
+  <h2>Próximos jogos — horários de Brasília</h2>
+  <p>
+    A Copa do Mundo 2026 acontece de <strong>11 de junho a 19 de julho</strong> nos Estados Unidos,
+    México e Canadá. Os jogos do Brasil na fase de grupos começam às <strong>22h</strong> (horário
+    de Brasília). Veja os próximos confrontos:
+  </p>
+  <FixtureTable fixtures={upcoming} />
+  <p>
+    <a href="/jogos">Ver o calendário completo de jogos →</a> ·
+    <a href="/brasil">Jogos do Brasil na Copa 2026 →</a>
+  </p>
+
+  <h2>Que horas é o jogo do Brasil?</h2>
+  <p>
+    O próximo jogo da Seleção é <strong>{nextBrazil.teamA} x {nextBrazil.teamB}</strong>, em
+    {formatDateBR(nextBrazil.date)}, às <strong>{formatTimeBR(nextBrazil.date)}</strong> (horário de
+    Brasília), no {nextBrazil.venue}, em {nextBrazil.city}. Transmissão oficial pela CazéTV
+    (YouTube, grátis) e pela Globo na TV aberta. Todos os horários e canais estão na página
+    <a href="/brasil">jogos do Brasil</a>.
+  </p>
+
+  <h2>Onde assistir a Copa: resumo das opções oficiais</h2>
+  <table>
+    <thead>
+      <tr><th>Transmissão oficial</th><th>Onde</th><th>Quantos jogos</th><th>Preço</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV</a></td>
+        <td>YouTube</td><td>Todos os 104</td><td><strong>Grátis</strong></td>
+      </tr>
+      <tr>
+        <td><a href="https://ge.globo.com/" rel="noopener">Globo</a></td>
+        <td>TV aberta</td><td>~55 (todos do Brasil)</td><td>Grátis</td>
+      </tr>
+      <tr>
+        <td><a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a></td>
+        <td>Streaming</td><td>Jogos da Globo</td><td>Grátis (sinal da TV)</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.sbt.com.br/" rel="noopener">SBT</a> + <a href="https://nsports.com.br/" rel="noopener">N Sports</a></td>
+        <td>TV aberta + streaming</td><td>~32</td><td>Grátis</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Perguntas frequentes</h2>
+  <h3>É legal assistir a Copa grátis pela CazéTV?</h3>
+  <p>
+    Sim, totalmente. A CazéTV detém os direitos oficiais de transmissão e exibe os jogos
+    gratuitamente no YouTube. Não é pirataria — é a transmissão oficial.
+  </p>
+  <h3>Precisa pagar alguma coisa para assistir a Copa 2026?</h3>
+  <p>
+    Não. Entre CazéTV (todos os jogos no YouTube), Globo e SBT (TV aberta), dá para assistir a Copa
+    do Mundo inteira sem gastar nada.
+  </p>
+  <h3>Onde vejo a tabela completa de jogos?</h3>
+  <p>
+    No nosso <a href="/jogos">calendário de jogos</a>, com datas e horários de Brasília, e no site
+    oficial da <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA</a>.
+    Mais dúvidas? Veja a <a href="/faq">página de perguntas frequentes</a>.
+  </p>
+</Base>

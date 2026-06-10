@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import FixtureTable from '../components/FixtureTable.astro';
+import { fixtures, fixturesOnOrAfter, dayKeyBR, formatDateBR } from '../lib/data';
+
+const today = new Date();
+const todayKey = dayKeyBR(today);
+const todayFixtures = fixtures.filter((f) => dayKeyBR(f.date) === todayKey);
+const upcoming = fixturesOnOrAfter(today).filter((f) => dayKeyBR(f.date) !== todayKey);
+
+// Group upcoming fixtures by day for scannable "jogos de hoje na tv" blocks.
+const byDay = new Map<string, typeof fixtures>();
+for (const f of upcoming) {
+  const key = dayKeyBR(f.date);
+  if (!byDay.has(key)) byDay.set(key, []);
+  byDay.get(key)!.push(f);
+}
+---
+
+<Base
+  title="Jogos de Hoje na Copa 2026: Horários de Brasília e Onde Assistir ao Vivo"
+  description="Jogos de hoje na Copa do Mundo 2026: calendário completo com horários de Brasília, qual canal transmite cada jogo (CazéTV, Globo, SBT) e onde assistir ao vivo e grátis."
+  path="/jogos"
+>
+  <h1>Jogos de Hoje e Calendário da Copa 2026 — Horário de Brasília</h1>
+
+  <p class="lead">
+    Confira os <strong>jogos de hoje</strong> da Copa do Mundo 2026 e o calendário completo da fase
+    de grupos, sempre no <strong>horário de Brasília</strong>. Todos os jogos têm transmissão grátis
+    pela <a href="/gratis">CazéTV no YouTube</a>; parte deles passa também na Globo e no SBT. Clique
+    em qualquer jogo para ver onde assistir ao vivo e qual canal transmite.
+  </p>
+
+  {todayFixtures.length > 0 ? (
+    <>
+      <h2>Quais são os jogos de hoje na Copa?</h2>
+      <FixtureTable fixtures={todayFixtures} />
+    </>
+  ) : (
+    <div class="box">
+      <strong>Hoje não há jogos da Copa.</strong> Veja abaixo os próximos confrontos — e o
+      <a href="/brasil">calendário do Brasil</a>.
+    </div>
+  )}
+
+  <h2>Próximos jogos da Copa do Mundo 2026</h2>
+  {[...byDay.entries()].map(([key, dayFixtures]) => (
+    <section>
+      <h3>{formatDateBR(dayFixtures[0].date)}</h3>
+      <FixtureTable fixtures={dayFixtures} />
+    </section>
+  ))}
+
+  {upcoming.length === 0 && todayFixtures.length === 0 && (
+    <p>A fase de grupos terminou. Em breve atualizamos com o mata-mata.</p>
+  )}
+
+  <h2>Como assistir aos jogos de hoje na TV e online</h2>
+  <p>
+    <strong>Grátis no YouTube:</strong> a CazéTV transmite todos os 104 jogos no canal
+    <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">@CazeTVoficial</a> — veja o
+    <a href="/gratis">passo a passo</a>. <strong>Na TV aberta:</strong> a
+    <a href="https://ge.globo.com/" rel="noopener">Globo</a> exibe cerca de 55 jogos (todos os do
+    Brasil) e o <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> cerca de 32, com streaming
+    pelo <a href="https://nsports.com.br/" rel="noopener">N Sports</a>. A tabela oficial completa
+    está no site da
+    <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA</a>.
+  </p>
+</Base>

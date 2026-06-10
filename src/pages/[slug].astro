@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+import FixtureTable from '../components/FixtureTable.astro';
+import { fixtures, formatDateBR, formatTimeBR } from '../lib/data';
+import { SITE } from '../../site.config';
+
+export function getStaticPaths() {
+  return fixtures.map((f) => ({ params: { slug: f.slug }, props: { fixture: f } }));
+}
+
+const { fixture: f } = Astro.props;
+const matchName = `${f.teamA} x ${f.teamB}`;
+const dateBR = formatDateBR(f.date);
+const timeBR = formatTimeBR(f.date);
+
+const related = fixtures
+  .filter((m) => m.id !== f.id && (m.group === f.group || (f.isBrazil && m.isBrazil)))
+  .slice(0, 5);
+
+const countryName: Record<string, string> = { US: 'Estados Unidos', MX: 'México', CA: 'Canadá' };
+
+const sportsEventLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SportsEvent',
+  name: `${matchName} — Copa do Mundo 2026`,
+  sport: 'Soccer',
+  startDate: f.isoDate,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  inLanguage: 'pt-BR',
+  location: {
+    '@type': 'Place',
+    name: f.venue,
+    address: `${f.city}, ${countryName[f.countryCode] ?? f.countryCode}`
+  },
+  competitor: [
+    { '@type': 'SportsTeam', name: f.teamA },
+    { '@type': 'SportsTeam', name: f.teamB }
+  ],
+  subEvent: [
+    {
+      '@type': 'BroadcastEvent',
+      name: `${matchName} — assistir ao vivo na CazéTV (YouTube)`,
+      url: 'https://www.youtube.com/@CazeTVoficial',
+      isLiveBroadcast: true,
+      videoFormat: 'HD',
+      inLanguage: 'pt-BR',
+      broadcastOfEvent: { '@type': 'SportsEvent', name: matchName },
+      publishedOn: {
+        '@type': 'BroadcastService',
+        name: 'CazéTV',
+        broadcastDisplayName: 'CazéTV',
+        areaServed: 'BR'
+      }
+    }
+  ]
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: `Onde assistir ${matchName} ao vivo?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `${matchName} passa ao vivo e grátis na CazéTV, no YouTube (canal oficial @CazeTVoficial). Verifique também a programação da Globo e do SBT na TV aberta.`
+      }
+    },
+    {
+      '@type': 'Question',
+      name: `Que horas é ${matchName}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `${matchName} será em ${dateBR}, às ${timeBR} (horário de Brasília), no ${f.venue}, em ${f.city}.`
+      }
+    }
+  ]
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: `${SITE.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Jogos', item: `${SITE.url}/jogos` },
+    { '@type': 'ListItem', position: 3, name: matchName }
+  ]
+};
+---
+
+<Base
+  title={`${matchName} Onde Assistir ao Vivo: Que Horas e Qual Canal | Copa 2026`}
+  description={`${matchName} onde assistir ao vivo: ${dateBR}, às ${timeBR} (horário de Brasília). Transmissão oficial grátis pela CazéTV no YouTube; confira Globo e SBT na TV.`}
+  path={`/${f.slug}`}
+  jsonLd={[sportsEventLd, faqLd, breadcrumbLd]}
+>
+  <h1>Onde Assistir {matchName} ao Vivo — Copa do Mundo 2026</h1>
+
+  <p class="lead">
+    <strong>{matchName}</strong> acontece em <strong>{dateBR}</strong>, às
+    <strong>{timeBR}</strong> (horário de Brasília), no {f.venue}, em {f.city}
+    ({countryName[f.countryCode] ?? f.countryCode}){f.group && `, pelo Grupo ${f.group} da Copa do Mundo 2026`}.
+    Para assistir ao vivo e <strong>grátis</strong>, o caminho oficial é a
+    <strong>CazéTV no YouTube</strong>, que transmite todos os jogos da Copa de graça. Na TV aberta,
+    confira a programação da Globo e do SBT no dia do jogo.
+  </p>
+
+  <div class="box">
+    <strong>Resposta rápida:</strong> assista {matchName} ao vivo e grátis no canal oficial da
+    CazéTV no YouTube.
+    <br />
+    <a class="cta" href="https://www.youtube.com/@CazeTVoficial" rel="noopener">
+      Assistir na CazéTV (YouTube) →
+    </a>
+  </div>
+
+  <h2>Que horas é {matchName}?</h2>
+  <p>
+    O jogo começa às <strong>{timeBR} (horário de Brasília)</strong>, em {dateBR}. A bola rola no
+    {f.venue}, em {f.city}. Chegue alguns minutos antes — as transmissões da CazéTV abrem com
+    pré-jogo no canal.
+  </p>
+
+  <h2>Qual canal transmite {matchName}?</h2>
+  <table>
+    <thead>
+      <tr><th>Transmissão oficial</th><th>Como assistir</th><th>Preço</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV</a></td>
+        <td>YouTube (canal oficial)</td>
+        <td><strong>Grátis</strong></td>
+      </tr>
+      <tr>
+        <td><a href="https://ge.globo.com/" rel="noopener">Globo</a> / <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a></td>
+        <td>TV aberta + streaming (verificar programação do dia)</td>
+        <td>Grátis</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.sbt.com.br/" rel="noopener">SBT</a> / <a href="https://nsports.com.br/" rel="noopener">N Sports</a></td>
+        <td>TV aberta + streaming (verificar programação do dia)</td>
+        <td>Grátis</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    A CazéTV transmite <strong>todos os 104 jogos</strong> — então {matchName} com certeza passa lá,
+    de graça. Globo (~55 jogos) e SBT (~32 jogos) dividem a grade da TV aberta; a confirmação de
+    qual canal de TV exibe esta partida sai na programação do dia. Veja
+    <a href="/gratis">como assistir grátis</a> passo a passo.
+  </p>
+
+  <h2>Mais jogos para assistir</h2>
+  <FixtureTable fixtures={related} />
+  <p>
+    <a href="/jogos">Todos os jogos e horários de Brasília →</a>
+    {f.isBrazil && <> · <a href="/brasil">Calendário completo do Brasil →</a></>}
+  </p>
+</Base>

@@ -1,0 +1,50 @@
+{
+  "_note": "Official Brazilian rights holders for the FIFA World Cup 2026. Link only to these (transmissão oficial). Verified 2026-06-10.",
+  "broadcasters": [
+    {
+      "id": "cazetv",
+      "name": "CazéTV",
+      "url": "https://www.youtube.com/@CazeTVoficial",
+      "access": "free",
+      "type": "youtube",
+      "coverage": "Todos os 104 jogos da Copa do Mundo 2026, ao vivo e de graça no YouTube",
+      "label": "Grátis no YouTube"
+    },
+    {
+      "id": "globo",
+      "name": "TV Globo",
+      "url": "https://ge.globo.com/",
+      "access": "free",
+      "type": "tv",
+      "coverage": "Cerca de 55 jogos na TV aberta, incluindo todos os jogos do Brasil",
+      "label": "TV aberta"
+    },
+    {
+      "id": "globoplay",
+      "name": "Globoplay",
+      "url": "https://globoplay.globo.com/",
+      "access": "freemium",
+      "type": "streaming",
+      "coverage": "Transmissão online dos jogos exibidos pela Globo e pelo Sportv",
+      "label": "Streaming"
+    },
+    {
+      "id": "sbt",
+      "name": "SBT",
+      "url": "https://www.sbt.com.br/",
+      "access": "free",
+      "type": "tv",
+      "coverage": "Cerca de 32 jogos na TV aberta",
+      "label": "TV aberta"
+    },
+    {
+      "id": "nsports",
+      "name": "N Sports",
+      "url": "https://nsports.com.br/",
+      "access": "free",
+      "type": "streaming",
+      "coverage": "Transmissão online de parte dos jogos, em parceria com o SBT",
+      "label": "Streaming"
+    }
+  ]
+}

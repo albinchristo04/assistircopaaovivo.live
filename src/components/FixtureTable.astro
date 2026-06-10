@@ -1,0 +1,36 @@
+---
+import type { Fixture } from '../lib/data';
+import { formatDateBR, formatTimeBR } from '../lib/data';
+
+interface Props {
+  fixtures: Fixture[];
+  caption?: string;
+}
+
+const { fixtures, caption } = Astro.props;
+---
+
+<table>
+  {caption && <caption style="text-align:left;font-weight:700;padding:0.4rem 0;">{caption}</caption>}
+  <thead>
+    <tr>
+      <th>Jogo</th>
+      <th>Data</th>
+      <th>Horário (Brasília)</th>
+      <th>Onde assistir</th>
+    </tr>
+  </thead>
+  <tbody>
+    {fixtures.map((f) => (
+      <tr>
+        <td>
+          <a href={`/${f.slug}`}>{f.teamA} x {f.teamB}</a>
+          {f.isBrazil && <span class="badge">Brasil</span>}
+        </td>
+        <td>{formatDateBR(f.date)}</td>
+        <td><strong>{formatTimeBR(f.date)}</strong></td>
+        <td><a href={`/${f.slug}`}>qual canal →</a></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
