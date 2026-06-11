@@ -2,63 +2,62 @@ import rawFixtures from '../data/fixtures.json';
 import broadcastersData from '../data/broadcasters.br.json';
 import { SITE } from '../../site.config';
 
-// fixtures.json is shared across the network with Spanish team names; map to pt-BR here.
+// fixtures.json uses English team names; map to pt-BR here.
 const TEAM_PT: Record<string, string> = {
-  'México': 'México',
-  'Ecuador': 'Equador',
-  'Camerún': 'Camarões',
-  'Nueva Zelanda': 'Nova Zelândia',
-  'Estados Unidos': 'Estados Unidos',
-  'Marruecos': 'Marrocos',
-  'Colombia': 'Colômbia',
-  'Iraq': 'Iraque',
-  'Canadá': 'Canadá',
-  'Alemania': 'Alemanha',
-  'Serbia': 'Sérvia',
-  'Chile': 'Chile',
-  'Argentina': 'Argentina',
-  'Polonia': 'Polônia',
-  'Arabia Saudita': 'Arábia Saudita',
-  'Sudáfrica': 'África do Sul',
-  'Brasil': 'Brasil',
-  'Croacia': 'Croácia',
-  'Japón': 'Japão',
-  'Senegal': 'Senegal',
-  'Francia': 'França',
-  'Uruguay': 'Uruguai',
-  'Irán': 'Irã',
-  'Túnez': 'Tunísia',
-  'España': 'Espanha',
-  'Dinamarca': 'Dinamarca',
-  'Venezuela': 'Venezuela',
-  'Ghana': 'Gana',
-  'Portugal': 'Portugal',
-  'Corea del Sur': 'Coreia do Sul',
-  'Jamaica': 'Jamaica',
-  'Honduras': 'Honduras',
-  'Inglaterra': 'Inglaterra',
-  'Turquía': 'Turquia',
-  'Nigeria': 'Nigéria',
-  'Panamá': 'Panamá',
-  'Bélgica': 'Bélgica',
-  'Austria': 'Áustria',
-  'Costa Rica': 'Costa Rica',
-  'Jordania': 'Jordânia',
-  'Países Bajos': 'Países Baixos',
-  'Suiza': 'Suíça',
-  'Egipto': 'Egito',
-  'Uzbekistán': 'Uzbequistão',
-  'Italia': 'Itália',
-  'Escocia': 'Escócia',
+  'Mexico': 'México',
+  'South Africa': 'África do Sul',
+  'South Korea': 'Coreia do Sul',
+  'Czech Republic': 'República Tcheca',
+  'Canada': 'Canadá',
+  'Bosnia & Herzegovina': 'Bósnia e Herzegovina',
+  'Qatar': 'Catar',
+  'Switzerland': 'Suíça',
+  'Brazil': 'Brasil',
+  'Morocco': 'Marrocos',
+  'Haiti': 'Haiti',
+  'Scotland': 'Escócia',
+  'USA': 'Estados Unidos',
+  'Paraguay': 'Paraguai',
   'Australia': 'Austrália',
-  'Argelia': 'Argélia'
+  'Turkey': 'Turquia',
+  'Germany': 'Alemanha',
+  'Curaçao': 'Curaçao',
+  'Ivory Coast': 'Costa do Marfim',
+  'Ecuador': 'Equador',
+  'Netherlands': 'Países Baixos',
+  'Japan': 'Japão',
+  'Sweden': 'Suécia',
+  'Tunisia': 'Tunísia',
+  'Belgium': 'Bélgica',
+  'Egypt': 'Egito',
+  'Iran': 'Irã',
+  'New Zealand': 'Nova Zelândia',
+  'Spain': 'Espanha',
+  'Cape Verde': 'Cabo Verde',
+  'Saudi Arabia': 'Arábia Saudita',
+  'Uruguay': 'Uruguai',
+  'France': 'França',
+  'Senegal': 'Senegal',
+  'Iraq': 'Iraque',
+  'Norway': 'Noruega',
+  'Argentina': 'Argentina',
+  'Algeria': 'Argélia',
+  'Austria': 'Áustria',
+  'Jordan': 'Jordânia',
+  'Portugal': 'Portugal',
+  'DR Congo': 'Congo RD',
+  'Uzbekistan': 'Uzbequistão',
+  'Colombia': 'Colômbia',
+  'England': 'Inglaterra',
+  'Croatia': 'Croácia',
+  'Ghana': 'Gana',
+  'Panama': 'Panamá'
 };
 
 const CITY_PT: Record<string, string> = {
-  'Ciudad de México': 'Cidade do México',
-  'Nueva York': 'Nova York',
-  'Los Ángeles': 'Los Angeles',
-  'Filadelfia': 'Filadélfia'
+  'Mexico City': 'Cidade do México',
+  'Los Angeles': 'Los Angeles',
+  'San Francisco': 'San Francisco'
 };
 
 interface RawFixture {
@@ -71,7 +70,7 @@ interface RawFixture {
   venue: string;
   city: string;
   country: string;
-  slug: string;
+  slug?: string;
   stage?: string;
 }
 

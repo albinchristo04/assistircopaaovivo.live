@@ -143,6 +143,37 @@ const updated = new Date().toLocaleDateString('pt-BR', {
         color: var(--muted);
       }
       footer.site a { color: var(--muted); }
+      .ppvtv-banner {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #111;
+        color: #fff;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .ppvtv-banner:hover { background: #222; }
+      .ppvtv-live {
+        color: #ff3b3b;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+      }
+      .ppvtv-text { flex: 1; font-size: 0.95rem; color: #eee; }
+      .ppvtv-text strong { color: #fff; }
+      .ppvtv-cta {
+        background: var(--yellow);
+        color: var(--ink);
+        font-weight: 700;
+        padding: 0.35rem 0.9rem;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
     </style>
   </head>
   <body>
