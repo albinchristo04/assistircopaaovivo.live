@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FixtureTable from '../components/FixtureTable.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 import { fixtures, formatDateBR, formatTimeBR } from '../lib/data';
 import { SITE } from '../../site.config';
 
@@ -96,11 +97,7 @@ const breadcrumbLd = {
   path={`/${f.slug}`}
   jsonLd={[sportsEventLd, faqLd, breadcrumbLd]}
 >
-  <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank" class="ppvtv-banner">
-    <span class="ppvtv-live">● AO VIVO</span>
-    <span class="ppvtv-text">Assista {matchName} ao vivo agora em <strong>ppvtv.top</strong></span>
-    <span class="ppvtv-cta">Assistir agora →</span>
-  </a>
+  <PpvtvBanner label={`Assista ${matchName} ao vivo agora em`} />
 
   <h1>Onde Assistir {matchName} ao Vivo — Copa do Mundo 2026</h1>
 
@@ -158,6 +155,8 @@ const breadcrumbLd = {
     qual canal de TV exibe esta partida sai na programação do dia. Veja
     <a href="/gratis">como assistir grátis</a> passo a passo.
   </p>
+
+  <PpvtvBanner label={`Assista ${matchName} ao vivo em`} />
 
   <h2>Mais jogos para assistir</h2>
   <FixtureTable fixtures={related} />

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FixtureTable from '../components/FixtureTable.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 import { brazilFixtures, fixturesOnOrAfter, formatDateBR, formatTimeBR } from '../lib/data';
 
 const upcomingIds = new Set(fixturesOnOrAfter(new Date()).map((f) => f.id));
@@ -36,6 +37,8 @@ const faqLd = {
   path="/brasil"
   jsonLd={[faqLd]}
 >
+  <PpvtvBanner label="Assista os jogos do Brasil ao vivo em" />
+
   <h1>Jogos do Brasil na Copa 2026 — Que Horas e Onde Assistir</h1>
 
   <p class="lead">
@@ -57,6 +60,8 @@ const faqLd = {
 
   <h2>Tabela de jogos do Brasil na fase de grupos</h2>
   <FixtureTable fixtures={brazilFixtures} />
+
+  <PpvtvBanner label="Assista os jogos do Brasil ao vivo em" />
 
   <h2>Onde assistir os jogos do Brasil ao vivo?</h2>
   <p>

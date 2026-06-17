@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FixtureTable from '../components/FixtureTable.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 import { fixtures, fixturesOnOrAfter, dayKeyBR, formatDateBR } from '../lib/data';
 
 const today = new Date();
@@ -22,6 +23,8 @@ for (const f of upcoming) {
   description="Jogos de hoje na Copa do Mundo 2026: calendário completo com horários de Brasília, qual canal transmite cada jogo (CazéTV, Globo, SBT) e onde assistir ao vivo e grátis."
   path="/jogos"
 >
+  <PpvtvBanner />
+
   <h1>Jogos de Hoje e Calendário da Copa 2026 — Horário de Brasília</h1>
 
   <p class="lead">
@@ -54,6 +57,8 @@ for (const f of upcoming) {
   {upcoming.length === 0 && todayFixtures.length === 0 && (
     <p>A fase de grupos terminou. Em breve atualizamos com o mata-mata.</p>
   )}
+
+  <PpvtvBanner />
 
   <h2>Como assistir aos jogos de hoje na TV e online</h2>
   <p>

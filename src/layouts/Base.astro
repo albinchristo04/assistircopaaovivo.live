@@ -6,10 +6,14 @@ interface Props {
   description: string;
   path: string;
   jsonLd?: object[];
+  ogImage?: string;
 }
 
-const { title, description, path, jsonLd = [] } = Astro.props;
+const { title, description, path, jsonLd = [], ogImage = '/og.png' } = Astro.props;
 const canonical = `${SITE.url}${path === '/' ? '/' : path}`;
+const ogImageUrl = `${SITE.url}${ogImage}`;
+// Used as dateModified for content freshness signals (helps Bing/Google rank recency).
+const isoModified = new Date().toISOString();
 
 const siteGraph = {
   '@context': 'https://schema.org',
@@ -29,6 +33,17 @@ const siteGraph = {
       name: SITE.brand,
       inLanguage: SITE.lang,
       publisher: { '@id': `${SITE.url}/#org` }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: SITE.lang,
+      isPartOf: { '@id': `${SITE.url}/#website` },
+      dateModified: isoModified,
+      primaryImageOfPage: ogImageUrl
     }
   ]
 };
@@ -49,11 +64,39 @@ const updated = new Date().toLocaleDateString('pt-BR', {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- Crawler directives: index everything, allow rich previews (Bing + Google) -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="author" content={SITE.brand} />
+    <meta name="theme-color" content="#0a7d33" />
+
+    <!-- Self-referencing hreflang (single pt-BR locale) -->
+    <link rel="alternate" hreflang="pt-BR" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={SITE.brand} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:updated_time" content={isoModified} />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <script type="application/ld+json" set:html={JSON.stringify(siteGraph)} />
     {jsonLd.map((block) => (
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
@@ -193,13 +236,19 @@ const updated = new Date().toLocaleDateString('pt-BR', {
     </main>
     <footer class="site">
       <div class="inner">
+        <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank" class="ppvtv-banner">
+          <span class="ppvtv-live">● AO VIVO</span>
+          <span class="ppvtv-text">Assista a Copa do Mundo ao vivo agora em <strong>ppvtv.top</strong></span>
+          <span class="ppvtv-cta">Assistir agora →</span>
+        </a>
         <p>
           Guia independente de onde assistir a Copa do Mundo 2026 no Brasil. Linkamos apenas para
           transmissões oficiais: <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV</a>,
           <a href="https://ge.globo.com/" rel="noopener">Globo</a>,
           <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>,
-          <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> e
-          <a href="https://nsports.com.br/" rel="noopener">N Sports</a>.
+          <a href="https://www.sbt.com.br/" rel="noopener">SBT</a>,
+          <a href="https://nsports.com.br/" rel="noopener">N Sports</a> e
+          <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">ppvtv.top</a>.
           Calendário oficial em <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA.com</a>.
         </p>
         <p>

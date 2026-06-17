@@ -1,4 +1,13 @@
+# Allow all crawlers full access
 User-agent: *
+Allow: /
+
+# Bing
+User-agent: bingbot
+Allow: /
+
+# Google
+User-agent: Googlebot
 Allow: /
 
 Sitemap: https://assistircopaaovivo.live/sitemap-index.xml

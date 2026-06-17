@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FixtureTable from '../components/FixtureTable.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 import { fixturesOnOrAfter } from '../lib/data';
 
 const upcoming = fixturesOnOrAfter(new Date(), 6);
@@ -43,6 +44,8 @@ const faqLd = {
   path="/gratis"
   jsonLd={[faqLd]}
 >
+  <PpvtvBanner />
+
   <h1>Como Assistir a Copa do Mundo 2026 Grátis e Ao Vivo</h1>
 
   <p class="lead">
@@ -94,6 +97,8 @@ const faqLd = {
     sintonizar o canal na hora do jogo. O <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>
     também retransmite o sinal aberto da Globo de graça (com cadastro).
   </p>
+
+  <PpvtvBanner />
 
   <h2>Próximos jogos para assistir grátis</h2>
   <p>Todos os jogos abaixo terão transmissão gratuita pela CazéTV no YouTube:</p>

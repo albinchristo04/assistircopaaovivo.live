@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 
 const faqs = [
   {
@@ -49,6 +50,8 @@ const faqLd = {
   path="/faq"
   jsonLd={[faqLd]}
 >
+  <PpvtvBanner />
+
   <h1>Perguntas Frequentes — Assistir Copa do Mundo 2026 ao Vivo</h1>
 
   <p class="lead">
@@ -62,6 +65,8 @@ const faqLd = {
       <p>{f.a}</p>
     </section>
   ))}
+
+  <PpvtvBanner />
 
   <p>
     Veja também: <a href="/gratis">como assistir grátis pela CazéTV</a> ·

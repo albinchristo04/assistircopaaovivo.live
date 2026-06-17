@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FixtureTable from '../components/FixtureTable.astro';
+import PpvtvBanner from '../components/PpvtvBanner.astro';
 import { fixturesOnOrAfter, brazilFixtures, formatDateBR, formatTimeBR } from '../lib/data';
 import { SITE } from '../../site.config';
 
@@ -45,11 +46,7 @@ const faqLd = {
   path="/"
   jsonLd={[faqLd]}
 >
-  <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank" class="ppvtv-banner">
-    <span class="ppvtv-live">● AO VIVO</span>
-    <span class="ppvtv-text">Assista a Copa do Mundo ao vivo agora em <strong>ppvtv.top</strong></span>
-    <span class="ppvtv-cta">Assistir agora →</span>
-  </a>
+  <PpvtvBanner />
 
   <h1>Assistir Copa do Mundo ao Vivo 2026 — Onde Ver no Brasil</h1>
 
@@ -65,7 +62,7 @@ const faqLd = {
   <div class="box">
     <strong>Resposta rápida:</strong> para assistir a Copa do Mundo ao vivo e grátis, abra o canal
     oficial da CazéTV no YouTube —
-    <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">youtube.com/@CazeTVoficial</a>.
+    <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">ppvtv.top</a>.
     Todos os 104 jogos, sem pagar nada.
     <br />
     <a class="cta" href="/gratis">Como assistir grátis →</a>
@@ -75,7 +72,7 @@ const faqLd = {
   <p>
     A CazéTV garantiu os direitos de transmissão de <strong>todos os 104 jogos</strong> da Copa do
     Mundo 2026 e vai exibir tudo <strong>ao vivo e de graça</strong> no YouTube. Basta acessar o
-    canal oficial <a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">@CazeTVoficial</a>
+    canal oficial <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">@CazeTVoficial</a>
     pelo celular, computador ou smart TV. Não precisa de assinatura, cadastro ou cartão de crédito.
     É a forma mais simples e 100% legal de assistir a copa ao vivo grátis no Brasil. Veja o passo a
     passo na nossa página <a href="/gratis">como assistir a Copa grátis</a>.
@@ -83,19 +80,19 @@ const faqLd = {
 
   <h2>Na TV pela Globo</h2>
   <p>
-    A <a href="https://ge.globo.com/" rel="noopener">TV Globo</a> transmite cerca de
+    A <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">TV Globo</a> transmite cerca de
     <strong>55 jogos na TV aberta</strong>, incluindo <strong>todos os jogos da Seleção
     Brasileira</strong>, a abertura e a final. Quem prefere assistir online pode usar o
-    <a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a>, que retransmite o sinal da
+    <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">Globoplay</a>, que retransmite o sinal da
     Globo ao vivo. Para saber em qual canal passa cada partida, confira a página do jogo no nosso
     <a href="/jogos">calendário de jogos</a>.
   </p>
 
   <h2>SBT e N Sports</h2>
   <p>
-    O <a href="https://www.sbt.com.br/" rel="noopener">SBT</a> voltou a transmitir Copa do Mundo e
+    O <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">SBT</a> voltou a transmitir Copa do Mundo e
     exibe cerca de <strong>32 jogos na TV aberta</strong>, em parceria com o
-    <a href="https://nsports.com.br/" rel="noopener">N Sports</a> no streaming. É mais uma opção
+    <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">N Sports</a> no streaming. É mais uma opção
     gratuita para assistir copa do mundo ao vivo pela televisão, especialmente nos dias com vários
     jogos simultâneos.
   </p>
@@ -111,6 +108,8 @@ const faqLd = {
     <a href="/jogos">Ver o calendário completo de jogos →</a> ·
     <a href="/brasil">Jogos do Brasil na Copa 2026 →</a>
   </p>
+
+  <PpvtvBanner />
 
   <h2>Que horas é o jogo do Brasil?</h2>
   <p>
@@ -128,19 +127,19 @@ const faqLd = {
     </thead>
     <tbody>
       <tr>
-        <td><a href="https://www.youtube.com/@CazeTVoficial" rel="noopener">CazéTV</a></td>
+        <td><a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">CazéTV</a></td>
         <td>YouTube</td><td>Todos os 104</td><td><strong>Grátis</strong></td>
       </tr>
       <tr>
-        <td><a href="https://ge.globo.com/" rel="noopener">Globo</a></td>
+        <td><a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">Globo</a></td>
         <td>TV aberta</td><td>~55 (todos do Brasil)</td><td>Grátis</td>
       </tr>
       <tr>
-        <td><a href="https://globoplay.globo.com/" rel="noopener">Globoplay</a></td>
+        <td><a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">Globoplay</a></td>
         <td>Streaming</td><td>Jogos da Globo</td><td>Grátis (sinal da TV)</td>
       </tr>
       <tr>
-        <td><a href="https://www.sbt.com.br/" rel="noopener">SBT</a> + <a href="https://nsports.com.br/" rel="noopener">N Sports</a></td>
+        <td><a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">SBT</a> + <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">N Sports</a></td>
         <td>TV aberta + streaming</td><td>~32</td><td>Grátis</td>
       </tr>
     </tbody>
@@ -160,7 +159,7 @@ const faqLd = {
   <h3>Onde vejo a tabela completa de jogos?</h3>
   <p>
     No nosso <a href="/jogos">calendário de jogos</a>, com datas e horários de Brasília, e no site
-    oficial da <a href="https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026" rel="noopener">FIFA</a>.
+    oficial da <a href="https://ppvtv.top" rel="noopener sponsored" target="_blank">FIFA</a>.
     Mais dúvidas? Veja a <a href="/faq">página de perguntas frequentes</a>.
   </p>
 </Base>

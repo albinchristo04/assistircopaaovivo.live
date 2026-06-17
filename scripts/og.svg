@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a7d33"/>
+      <stop offset="100%" stop-color="#075c25"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="12" fill="#ffd633"/>
+  <rect x="0" y="618" width="1200" height="12" fill="#ffd633"/>
+  <text x="600" y="150" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#ffd633" text-anchor="middle">COPA DO MUNDO 2026</text>
+  <text x="600" y="290" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" fill="#ffffff" text-anchor="middle">Assistir Copa</text>
+  <text x="600" y="400" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" fill="#ffffff" text-anchor="middle">ao Vivo e Gratis</text>
+  <text x="600" y="500" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="400" fill="#eaffea" text-anchor="middle">Todos os 104 jogos - Horarios de Brasilia</text>
+  <text x="600" y="570" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#ffd633" text-anchor="middle">assistircopaaovivo.live</text>
+</svg>
